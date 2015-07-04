@@ -1,0 +1,38 @@
+{
+  "name": "sif",
+  "version": "1.0.0",
+  "description": "A more robust Angular template",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IAmEddieDean/Sif"
+  },
+  "keywords": [
+    "Angular",
+    "SASS",
+    "Gulp"
+  ],
+  "author": "Christopher Oyler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IAmEddieDean/Sif/issues"
+  },
+  "homepage": "https://github.com/IAmEddieDean/Sif",
+  "devDependencies": {
+    "browser-sync": "^2.7.13",
+    "gulp": "^3.9.0",
+    "gulp-bower": "0.0.10",
+    "gulp-concat": "^2.6.0",
+    "gulp-copy": "0.0.2",
+    "gulp-jade": "^1.0.1",
+    "gulp-jshint": "^1.11.2",
+    "gulp-sass": "^2.0.3",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-util": "^3.0.6",
+    "rimraf": "^2.4.1",
+    "run-sequence": "^1.1.1"
+  }
+}

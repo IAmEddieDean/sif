@@ -1,0 +1,23 @@
+{
+  "name": "sif",
+  "version": "0.0.1",
+  "authors": [
+    "Chris Oyler <christopher.oyler@gmail.com>"
+  ],
+  "description": "Bower Dependencies for Sif",
+  "main": "index.html",
+  "keywords": [
+    "Angular",
+    "Jade",
+    "SASS"
+  ],
+  "license": "MIT",
+  "homepage": "github.com/IAmEddieDean/Sif",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
