@@ -78,8 +78,7 @@ gulp.task('bower', function(){
 gulp.task('jshint', function(){
   return gulp.src(paths.codesrc)
   .pipe(jshint())
-  .pipe(jshint.reporter('jshint-stylish'))
-  .on('error', gutil.log);
+  .pipe(jshint.reporter('jshint-stylish'));
 });
 gulp.task('jade', function(){
   return gulp.src(paths.jadesrc)
@@ -93,8 +92,7 @@ gulp.task('build-css', function(){
   .pipe(sass())
   .pipe(concat('styles.css'))
   .pipe(sourcemaps.write())
-  .pipe(gulp.dest(paths.destination))
-  .on('error', gutil.log);
+  .pipe(gulp.dest(paths.destination));
 });
 
 gulp.task('build-js', function(){
@@ -104,6 +102,5 @@ gulp.task('build-js', function(){
     //uglify if you run 'gulp --type prod'
   .pipe(isProd ? uglify() : gutil.noop())
   .pipe(sourcemaps.write())
-  .pipe(gulp.dest(paths.destination))
-  .on('error', gutil.log);
+  .pipe(gulp.dest(paths.destination));
 });
