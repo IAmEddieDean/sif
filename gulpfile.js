@@ -34,7 +34,7 @@ gulp.task('default', function(cb){
   run('build', 'serve', 'watch', cb);
 });
 gulp.task('build', ['clean:public', 'clean:temp'], function(cb){
-  run('bower', 'jade', 'jshint', 'build-js', 'build-css', 'copy', cb);
+  run('bower', 'jade', 'build-js', 'build-css', 'copy', cb);
 });
 //refresh tasks
 gulp.task('refresh', function(cb){
