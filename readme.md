@@ -9,7 +9,9 @@ Includes: Angular.js, Bootstrap, jQuery, Firebase, AngularFire, Angular UI Route
 
 #### Setup
 git clone https://github.com/IAmEddieDean/sif
+
 cd sif
+
 npm run setup
 
 
