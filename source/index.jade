@@ -1,5 +1,25 @@
-h1 hello world
-h2 test?
-h3 this is just a tribute
-h4 is this thing on?
-h5 I don't even know anymore.
+doctype html
+html(lang='en', ng-app='sif')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Sif
+    link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/simplex/bootstrap.min.css')
+    link(rel='stylesheet', href='/styles.css')
+    link(rel='shortcut icon', href='/favicon.ico')
+  body
+    include views/nav/nav
+    .container
+      .row
+        .col-xs-12
+          div(ui-view)
+
+    script(src='./packages/jquery/dist/jquery.min.js')
+    script(src='./packages/bootstrap/dist/js/bootstrap.min.js')
+    script(src='./packages/lodash/lodash.min.js')
+    script(src='./packages/firebase/firebase.js')
+    script(src='./packages/angular/angular.min.js')
+    script(src='./packages/angularfire/dist/angularfire.min.js')
+    script(src='./packages/angular-ui-router/release/angular-ui-router.min.js')
+    script(src='./index.js')

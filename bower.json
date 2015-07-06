@@ -5,7 +5,6 @@
     "Chris Oyler <christopher.oyler@gmail.com>"
   ],
   "description": "Bower Dependencies for Sif",
-  "main": "index.html",
   "keywords": [
     "Angular",
     "Jade",
@@ -19,5 +18,14 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "angular": "~1.4.1",
+    "angular-ui-router": "~0.2.15",
+    "angularfire": "~1.1.2",
+    "firebase": "~2.2.7",
+    "bootstrap": "~3.3.5",
+    "lodash": "~3.10.0",
+    "jquery": "~2.1.4"
+  }
 }

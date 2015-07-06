@@ -1,0 +1,19 @@
+h3.text-center {{name | uppercase}}
+
+.row.text-center
+  .col-xs-6.col-xs-offset-3
+    form(name='userForm' ng-submit='submit(user)')
+      .form-group
+        label(for='email') Email
+        input.form-control#email(type='email', name='email', ng-model='user.email')
+      .form-group
+        label(for='password') Password
+        input.form-control#password(type='password', name='password', ng-model='user.password')
+      .form-group
+        button.btn.btn-success.pull-left(type='submit') Email
+      .form-group.pull-right
+        span Or Login with:
+        button.btn.btn-info(type='button' ng-click='oauth("twitter")') Twitter
+        button.btn.btn-primary(type='button' ng-click='oauth("google")') Google
+        button.btn.btn-info(type='button' ng-click='oauth("facebook")') Facebook
+        button.btn.btn-default(type='button' ng-click='oauth("github")') GitHub

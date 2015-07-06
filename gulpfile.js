@@ -11,13 +11,14 @@ var gulp =        require('gulp'),
     copy =        require('gulp-copy'),
     jade =        require('gulp-jade'),
     bower =       require('gulp-bower'),
+    watch =       require('gulp-watch'),
     browser =     require('browser-sync'),
     rimraf =      require('rimraf'),
     run =         require('run-sequence'),
     isProd =      gutil.env.type === 'prod',
     
     paths = {
-      filesrc: ['./source/**/*'],
+      filesrc: ['./source/**/*.*'],
       jadesrc: ['./source/**/*.jade'],
       htmlsrc: ['./public/**/*.html'],
       sasssrc: ['./source/**/*.scss'],
@@ -34,17 +35,18 @@ gulp.task('default', function(cb){
 });
 
 gulp.task('build', ['clean:public', 'clean:temp'], function(cb){
-  run('jshint', 'copy', 'build-js', 'build-css', 'jade', cb);
+  // run('jshint', 'copy', 'build-js', 'build-css', 'jade', cb);
+  run('bower', 'jade', 'jshint', 'build-js', 'build-css', 'copy', cb);
 });
-
+//refresh tasks
 gulp.task('refresh', function(cb){
-  run('build', 'reload', cb);
+  return run('build', 'reload', cb);
 });
 gulp.task('serve', function(){
-  return browser({server: paths.destination});
+  browser.init({server: paths.destination});
 });
 gulp.task('reload', function(){
-  return browser.reload();
+  browser.reload();
 });
 //wipe out public and temp folders on build
 gulp.task('clean:public', function(cb){
@@ -57,7 +59,7 @@ gulp.task('clean:temp', function(cb){
 
 //set which files to watch for changes
 gulp.task('watch', function(){
-  return gulp.watch(paths.filesrc, function(){
+  return watch(paths.filesrc, function(){
     gulp.start('refresh');
   });
 });
