@@ -1,3 +1,3 @@
 'use strict';
 
-var app = angular.module('sif', ['firebase', 'ui.router']);
+angular.module('sif', ['firebase', 'ui.router']);
