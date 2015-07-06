@@ -31,11 +31,9 @@ var gulp =        require('gulp'),
 
 //build tasks
 gulp.task('default', function(cb){
-  run('bower', 'build', 'serve', 'watch', cb);
+  run('build', 'serve', 'watch', cb);
 });
-
 gulp.task('build', ['clean:public', 'clean:temp'], function(cb){
-  // run('jshint', 'copy', 'build-js', 'build-css', 'jade', cb);
   run('bower', 'jade', 'jshint', 'build-js', 'build-css', 'copy', cb);
 });
 //refresh tasks
@@ -64,6 +62,7 @@ gulp.task('watch', function(){
   });
 });
 
+//helper tasks
 gulp.task('copy', function(){
   return gulp.src(paths.mediasrc)
   .pipe(copy(paths.destination, {prefix: 1}))
@@ -73,7 +72,6 @@ gulp.task('clean', function(cb){
   rimraf(paths.destination);
   rimraf(paths.temp, cb);
 });
-
 gulp.task('bower', function(){
   return bower();
 });
@@ -96,7 +94,6 @@ gulp.task('build-css', function(){
   .pipe(sourcemaps.write())
   .pipe(gulp.dest(paths.destination));
 });
-
 gulp.task('build-js', function(){
   return gulp.src(paths.codesrc)
   .pipe(sourcemaps.init())
