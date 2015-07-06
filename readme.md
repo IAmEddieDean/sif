@@ -8,11 +8,11 @@
 Includes: Angular.js, Bootstrap, jQuery, Firebase, AngularFire, Angular UI Router, Sass, Jade, and Lodash.
 
 #### Setup
-git clone https://github.com/IAmEddieDean/sif
+$ git clone https://github.com/IAmEddieDean/sif
 
-cd sif
+$ cd sif
 
-npm run setup
+$ npm run setup
 
 
 ##### Happy Coding!
