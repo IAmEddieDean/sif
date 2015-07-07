@@ -7,7 +7,6 @@ var gulp =        require('gulp'),
     jshint =      require('gulp-jshint'),
     sass =        require('gulp-sass'),
     plumber =     require('gulp-plumber'),
-    // coffee =      require('gulp-coffee'),
     sourcemaps =  require('gulp-sourcemaps'),
     concat =      require('gulp-concat'),
     copy =        require('gulp-copy'),
@@ -83,12 +82,6 @@ gulp.task('jshint', function(){
   .pipe(jshint())
   .pipe(jshint.reporter('jshint-stylish'));
 });
-// gulp.task('gulp-plumber', function(){
-//   return gulp.src('./src/*.ext')
-//   .pipe(plumber())
-//   .pipe(coffee())
-//   .pipe(gulp.dest('./dist'));
-// });
 gulp.task('jade', function(){
   return gulp.src(paths.jadesrc)
   .pipe(plumber())
