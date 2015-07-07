@@ -1,4 +1,6 @@
+$size: 100px;
+
 .logos > img{
-  max-width: 100px;
+  max-width: $size;
   max-height: 100px;
 }

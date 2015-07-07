@@ -23,17 +23,18 @@
   },
   "homepage": "https://github.com/IAmEddieDean/Sif",
   "devDependencies": {
-    "browser-sync": "^2.7.13",
-    "gulp": "^3.9.0",
+    "browser-sync": "2.7.13",
+    "gulp": "3.9.0",
     "gulp-bower": "0.0.10",
-    "gulp-concat": "^2.6.0",
+    "gulp-concat": "2.6.0",
     "gulp-copy": "0.0.2",
-    "gulp-jade": "^1.0.1",
-    "gulp-sass": "^2.0.3",
-    "gulp-sourcemaps": "^1.5.2",
-    "gulp-util": "^3.0.6",
-    "gulp-watch": "^4.2.4",
-    "rimraf": "^2.4.1",
-    "run-sequence": "^1.1.1"
+    "gulp-jade": "1.0.1",
+    "gulp-jshint": "1.11.2",
+    "gulp-sass": "2.0.3",
+    "gulp-sourcemaps": "1.5.2",
+    "gulp-util": "3.0.6",
+    "gulp-watch": "4.2.4",
+    "rimraf": "2.4.1",
+    "run-sequence": "1.1.1"
   }
 }
