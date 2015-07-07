@@ -3,9 +3,10 @@
 //package requirements
 var gulp =        require('gulp'),
     gutil =       require('gulp-util'),
-    
+
     jshint =      require('gulp-jshint'),
     sass =        require('gulp-sass'),
+    plumber =     require('gulp-plumber'),
     sourcemaps =  require('gulp-sourcemaps'),
     concat =      require('gulp-concat'),
     copy =        require('gulp-copy'),
@@ -16,7 +17,7 @@ var gulp =        require('gulp'),
     rimraf =      require('rimraf'),
     run =         require('run-sequence'),
     isProd =      gutil.env.type === 'prod',
-    
+
     paths = {
       filesrc: ['./source/**/*.*'],
       jadesrc: ['./source/**/*.jade'],
@@ -28,6 +29,7 @@ var gulp =        require('gulp'),
       temp: './temp',
       tempfiles: ['./temp/*.css', './temp/*.js']
     };
+
 
 //build tasks
 gulp.task('default', function(cb){
@@ -82,20 +84,26 @@ gulp.task('jshint', function(){
 });
 gulp.task('jade', function(){
   return gulp.src(paths.jadesrc)
-    .pipe(jade({pretty: true, doctype: 'html', locals: {isProd: isProd}}))
-    .pipe(gulp.dest(paths.destination))
-    .on('error', gutil.log);
+  .pipe(plumber())
+  .pipe(jade({pretty: true, doctype: 'html', locals: {isProd: isProd}}))
+  .pipe(gulp.dest(paths.destination))
+  .on('error', gutil.log);
 });
 gulp.task('build-css', function(){
   return gulp.src(paths.sasssrc)
+  .pipe(plumber(function(error) {
+    gutil.log(gutil.colors.red(error.message));
+    this.emit('end');
+  }))
   .pipe(sourcemaps.init())
-  .pipe(sass())
+  .pipe(sass({errLogToConsole: true}))
   .pipe(concat('styles.css'))
   .pipe(sourcemaps.write())
   .pipe(gulp.dest(paths.destination));
 });
 gulp.task('build-js', function(){
   return gulp.src(paths.codesrc)
+  .pipe(plumber())
   .pipe(sourcemaps.init())
   .pipe(concat('index.js'))
     //uglify if you run 'gulp --type prod'
