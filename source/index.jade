@@ -6,7 +6,7 @@ html(lang='en', ng-app='sif')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     title Sif
     link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/simplex/bootstrap.min.css')
-    link(rel='stylesheet', href='/styles.css')
+    link(rel='stylesheet', href=isProd ? '/styles.min.css' : '/styles.css')
     link(rel='shortcut icon', href='/favicon.ico')
   body
     include views/nav/nav
@@ -22,4 +22,4 @@ html(lang='en', ng-app='sif')
     script(src='./packages/angular/angular.min.js')
     script(src='./packages/angularfire/dist/angularfire.min.js')
     script(src='./packages/angular-ui-router/release/angular-ui-router.min.js')
-    script(src='./index.js')
+    script(src=isProd ? './index.min.js' : './index.js')

@@ -16,7 +16,14 @@ var gulp =        require('gulp'),
     browser =     require('browser-sync'),
     rimraf =      require('rimraf'),
     run =         require('run-sequence'),
-    isProd =      gutil.env.type === 'prod',
+    uglify =      require('gulp-uglify'),
+    rename =      require('gulp-rename'),
+    gulpif =      require('gulp-if'),
+    parallelize = require('concurrent-transform'),
+    aws =         require('gulp-awspublish'),
+    annotate =    require('gulp-ng-annotate'),
+    mincss =      require('gulp-minify-css'),
+    isProd =      process.env.NODE_ENV === 'prod',
 
     paths = {
       filesrc: ['./source/**/*.*'],
@@ -27,7 +34,8 @@ var gulp =        require('gulp'),
       mediasrc: ['./source/media/**/*', './source/favicon.ico'],
       destination: './public',
       temp: './temp',
-      tempfiles: ['./temp/*.css', './temp/*.js']
+      tempfiles: ['./temp/*.css', './temp/*.js'],
+      aws: '.awspublish-*'
     };
 
 
@@ -38,12 +46,12 @@ gulp.task('default', function(cb){
 gulp.task('build', ['clean:public', 'clean:temp'], function(cb){
   run('bower', 'jade', 'build-js', 'build-css', 'copy', cb);
 });
+gulp.task('serve', function(){
+  browser.init({server: paths.destination});
+});
 //refresh tasks
 gulp.task('refresh', function(cb){
   return run('build', 'reload', cb);
-});
-gulp.task('serve', function(){
-  browser.init({server: paths.destination});
 });
 gulp.task('reload', function(){
   browser.reload();
@@ -55,15 +63,12 @@ gulp.task('clean:public', function(cb){
 gulp.task('clean:temp', function(cb){
   rimraf(paths.temp, cb);
 });
-
-
 //set which files to watch for changes
 gulp.task('watch', function(){
   return watch(paths.filesrc, function(){
     gulp.start('refresh');
   });
 });
-
 //helper tasks
 gulp.task('copy', function(){
   return gulp.src(paths.mediasrc)
@@ -98,6 +103,8 @@ gulp.task('build-css', function(){
   .pipe(sourcemaps.init())
   .pipe(sass({errLogToConsole: true}))
   .pipe(concat('styles.css'))
+  .pipe(gulpif(isProd, rename({suffix: '.min'})))
+  .pipe(gulpif(isProd, mincss()))
   .pipe(sourcemaps.write())
   .pipe(gulp.dest(paths.destination));
 });
@@ -106,8 +113,32 @@ gulp.task('build-js', function(){
   .pipe(plumber())
   .pipe(sourcemaps.init())
   .pipe(concat('index.js'))
-    //uglify if you run 'gulp --type prod'
+  .pipe(annotate({single_quotes: true}))
+    //uglify if you "export NODE_ENV='prod'"
+  .pipe(gulpif(isProd, rename({suffix: '.min'})))
   .pipe(isProd ? uglify() : gutil.noop())
   .pipe(sourcemaps.write())
-  .pipe(gulp.dest(paths.destination));
+  .pipe(gulp.dest(paths.destination))
+  .on('error', gutil.log);
+});
+
+//publishing tasks for amazon web services
+gulp.task('publish', ['build'], function(){
+  var bucket = process.env.AWS_BUCKET;
+  var awsParams = {
+    'params': {
+      "Bucket": process.env.AWS_BUCKET
+    },
+    'accessKeyId': process.env.AWS_ACCESS_KEY_ID,
+    'secretAccessKey': process.env.AWS_SECRET_ACCESS_KEY
+    };
+  console.log(bucket);
+  var publisher = aws.create(awsParams);
+  var headers = {};
+  return gulp.src('./public/**/*')
+    .pipe(aws.gzip())
+    .pipe(parallelize(publisher.publish(headers), 20))
+    .pipe(publisher.cache())
+    .pipe(aws.reporter())
+    .on('error', gutil.log);
 });
