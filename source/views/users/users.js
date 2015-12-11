@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('sif')
-.controller('UsersCtrl', function($scope, $state){
+.controller('UsersCtrl', ['$scope', '$state', ($scope, $state) => {
   console.log('user ctrl online');
   
   $scope.name = $state.current.name.split('.')[1];
   
-  $scope.submit = function(user){
+  $scope.submit = (user) => {
     console.log(user);
   };
-});
+}]);

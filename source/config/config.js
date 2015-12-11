@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sif')
-.config(function($stateProvider, $urlRouterProvider){
+.config(['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) => {
   $urlRouterProvider.otherwise('/');
     
   $stateProvider
@@ -9,4 +9,4 @@ angular.module('sif')
   .state('user', {url: '', templateUrl: '/views/users/user.html', abstract: true})
   .state('user.register', {url: '/register', templateUrl: '/views/users/users.html', controller: 'UsersCtrl'})
   .state('user.login', {url: '/login', templateUrl: '/views/users/users.html', controller: 'UsersCtrl'});
-});
+}]);

@@ -1,6 +1,13 @@
 'use strict';
 
 angular.module('sif')
-.factory('User', function(){
-  return;
-});
+.factory('User', [() => {
+  class User {
+    
+    constructor(){
+      //do stuff
+    }
+    
+  }
+  return User;
+}]);

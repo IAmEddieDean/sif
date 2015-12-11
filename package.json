@@ -1,6 +1,6 @@
 {
   "name": "sif",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A more robust Angular template",
   "main": "gulpfile.js",
   "scripts": {
@@ -23,12 +23,13 @@
   },
   "homepage": "https://github.com/IAmEddieDean/Sif",
   "devDependencies": {
+    "babel": "^6.3.13",
     "browser-sync": "2.7.13",
     "concurrent-transform": "^1.0.0",
     "gulp": "3.9.0",
     "gulp-awspublish": "^2.0.2",
+    "gulp-babel": "^6.1.1",
     "gulp-bower": "0.0.10",
-    "gulp-coffee": "2.3.1",
     "gulp-concat": "2.6.0",
     "gulp-copy": "0.0.2",
     "gulp-if": "^1.2.5",
