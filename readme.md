@@ -1,6 +1,8 @@
 # SIF
 ## Because Norse Gods were cool.
 
+### Check out the `es6` branch for some ECMAScript 2015 love. Thanks for checking this out!
+
 ### A more robust template for all your Angular.js needs.
 ![Packagist](https://img.shields.io/badge/Angular-1.4.1-red.svg?style=flat-square)
 ![Packagist](https://img.shields.io/badge/Bootstrap-3.3.5-blue.svg?style=flat-square)
